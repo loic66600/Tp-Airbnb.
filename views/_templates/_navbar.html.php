@@ -1,8 +1,10 @@
  <?php
+
   use Core\Session\Session;
-  if ($auth::isAuth()) $user_id = Session::get(Session::USER)->id; 
+
+  if ($auth::isAuth()) $user_id = Session::get(Session::USER)->id;
   ?>
-  
+
  <div class="d-flex justify-content-between align-items-center">
    <!-- logo -->
    <div class="nav-logo">
@@ -30,35 +32,47 @@
      </nav>
    </div>
    <!-- menu du profil -->
-   <div class="dropdown custom-link">
 
-     <a class="dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-       <button type="button" class="btn btn-outline-secondary rounded-pill">Mon compte <i class="bi bi-person-circle custom-svg"></i></button>
+   
 
-     </a>
+   
+   <?php if ($auth::isAuth()) : ?>
 
+    <span class="compte">
+      <p>Bonjour <?= Session::get(Session::USER)->firstname ?> </p>
+      
+      <div class="dropdown custom-link">
+      
+        <a class="dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+          <button type="button" class="btn btn-outline-secondary rounded-pill">Mon compte <i class="bi bi-person-circle custom-svg"></i></button>
+        </a>
+    </span>
+      
      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-  <?php   if (!$auth::isAuth()): ?>
-       <li><a class="dropdown-item custom-link" href="/inscription">Inscription</a></li>
-       <li>
-         <hr class="dropdown-divider">
-       </li>
-       <li><a class="dropdown-item custom-link" href="/connexion">Connexion</a></li>
-       
-       <?php else: ?>
-       <li><a class="dropdown-item custom-link" href="/add_logement">Mettre mon logement sur Airbnb</a></li>
-       
-       <li><a class="dropdown-item custom-link" href="/insertLogementForm/<?= $user_id ?>">Mes logements</a></li>
-      
-       <li><a class="dropdown-item custom-link" href="/result_reservation/<?= $user_id ?>">Mes reservation</a></li>
-      
-       <li>
-         <hr class="dropdown-divider">
-       </li>
-       <li><a class="dropdown-item custom-link" href="/logout">Se déconnecter</a></li>
-       <?php endif ?>
-     </ul>
+         
+         
+         
+
+         <li><a class="dropdown-item custom-link" href="/add_logement">Mettre mon logement sur Airbnb</a></li>
+         
+         <li><a class="dropdown-item custom-link" href="/insertLogementForm/<?= $user_id ?>">Mes logements</a></li>
+         
+         <li><a class="dropdown-item custom-link" href="/result_reservation/<?= $user_id ?>">Mes reservation</a></li>
+         
+         <li>
+           <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item custom-link" href="/logout">Se déconnecter</a></li>
+          <?php else : ?>
+
+         <span class="compte">
+           <li><a class="dropdown-item custom-link " href="/connexion"> Se Connecter</a></li>
+           <li><a class="dropdown-item custom-link" href="/inscription">Inscription</a></li>
+         </span>
+         <?php endif ?>
+        </ul>
+     
    </div>
    </li>
  </div>
-<hr>
+ <hr>

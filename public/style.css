@@ -32,6 +32,13 @@ body {
   flex-grow: 1;
 
 }
+.compte{
+  display: ruby;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
 .home {
 
   display: flex;
