@@ -86,4 +86,23 @@ class ReservationRepository extends Repository
     //on retourne le tableau
     return $array_result;
   }
+
+  public function deleteReservation(int $id): bool
+{
+    $q = sprintf(
+      'DELETE FROM `%s`
+      WHERE `id` = :id',
+      $this->getTableName()
+    );
+    //on execute la requête
+    $stmt = $this->pdo->prepare($q);
+
+    //on execute la requête
+    if (!$stmt) return false;
+
+    //on retourne l id de la nouvelle entrée
+    return $stmt->execute(['id' => $id]);
+}
+
+
 }

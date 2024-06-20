@@ -14,6 +14,7 @@
 </head>
 
 <body>
+  <div class="main-container">
   <header>
     <?php include(PATH_ROOT .'views/_templates/_navbar.html.php'); ?>
   </header>

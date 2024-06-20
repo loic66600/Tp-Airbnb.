@@ -38,23 +38,27 @@
      </a>
 
      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+  <?php   if (!$auth::isAuth()): ?>
        <li><a class="dropdown-item custom-link" href="/inscription">Inscription</a></li>
-       <li><a class="dropdown-item custom-link" href="/connexion">Connexion</a></li>
        <li>
          <hr class="dropdown-divider">
        </li>
+       <li><a class="dropdown-item custom-link" href="/connexion">Connexion</a></li>
+       
+       <?php else: ?>
        <li><a class="dropdown-item custom-link" href="/add_logement">Mettre mon logement sur Airbnb</a></li>
-
-       <li><a class="dropdown-item custom-link" href="/result_reservation/<?= $user_id ?>">Mes logements</a></li>
-       <?php if ($auth::isAuth()) : ?>
+       
+       <li><a class="dropdown-item custom-link" href="/insertLogementForm/<?= $user_id ?>">Mes logements</a></li>
+      
        <li><a class="dropdown-item custom-link" href="/result_reservation/<?= $user_id ?>">Mes reservation</a></li>
-       <?php endif ?>
+      
        <li>
          <hr class="dropdown-divider">
        </li>
        <li><a class="dropdown-item custom-link" href="/logout">Se déconnecter</a></li>
+       <?php endif ?>
      </ul>
    </div>
    </li>
  </div>
- <div class="separation"></div>
+<hr>

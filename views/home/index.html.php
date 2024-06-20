@@ -1,18 +1,19 @@
 <title>Scrollable Icon Bar</title>
-    <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-<div class="icon-bar-container">
+    <div class="icon-bar-container">
         <button class="scroll-button left" id="scroll-left">&#8249;</button>
         <div class="icon-bar" id="icon-bar">
 
-            <a href="">
+            <a href="http://airbnb-poo-loic.lndo.site/detail/1?">
                 <div class="icon-item">
                     <img src="/assets/image/icon/house.svg" alt="Maison">
                     <p>Maison</p>
                 </div>
             </a>
-            <a href="">
+            <a href="http://airbnb-poo-loic.lndo.site/detail/6?">
                 <div class="icon-item">
                     <img src="/assets/image/icon/island.svg" alt="Iles paradis">
                     <p>Iles paradis</p>
@@ -48,7 +49,7 @@
                     <p>Piscine</p>
                 </div>
             </a>
-            <a href="">
+            <a href="http://airbnb-poo-loic.lndo.site/detail/5?">
                 <div class="icon-item">
                     <img src="/assets/image/icon/castle.svg" alt="Chateau">
                     <p>Chateau</p>
@@ -162,11 +163,47 @@
                     <p>Paris</p>
                 </div>
             </a>
+            <a href="">
+                <div class="icon-item">
+                    <img src="/assets/image/icon/hut.svg" alt="Montagne">
+                    <p>Hute</p>
+                </div>
+            </a>
+            <a href="">
+                <div class="icon-item">
+                    <img src="/assets/image/icon/rocket.svg" alt="Montagne">
+                    <p>extraordinaire</p>
+                </div>
+            </a>
+            <a href="">
+                <div class="icon-item">
+                    <img src="/assets/image/icon/park.svg" alt="Montagne">
+                    <p>Foret</p>
+                </div>
+            </a>
+            <a href="">
+                <div class="icon-item">
+                    <img src="/assets/image/icon/mansion.svg" alt="Montagne">
+                    <p>Manoir</p>
+                </div>
+            </a>
+            <a href="">
+                <div class="icon-item">
+                    <img src="/assets/image/icon/piano.svg" alt="Montagne">
+                    <p>Musical</p>
+                </div>
+            </a>
+            <a href="">
+                <div class="icon-item">
+                    <img src="/assets/image/icon/play.svg" alt="Montagne">
+                    <p></p>
+                </div>
+            </a>
         </div>
         <button class="scroll-button right" id="scroll-right">&#8250;</button>
     </div>
     <script src="script.js"></script>
-    <h1 class="">Mes logements Disponibles</h1>
+    <h1 class="title">Mes logements Disponibles</h1>
     <?php include(PATH_ROOT . 'views/_templates/_message.html.php'); ?>
     <br>
     <div class="container">
@@ -175,11 +212,12 @@
                 <div class="card-item">
                     <div class="card">
                         <form action="/detail/<?= $logement->id ?>">
+
                             <div class="card-body">
-                                <?php foreach ($logement->medias as $image) : ?>
-                                    <img class="card-img" src="/assets/image/<?= $image ?>" alt="">
-                                <?php endforeach; ?>
-                                <h3 class="card-title sub-title text-center"><?= $logement->title ?><i class="bi bi-heart heart-icon" style="margin-left: 20px; font-size: 20px; cursor: pointer;"></i></h3>
+
+                                <img class="card-img" src="/assets/image/<?= $logement->medias[0]->image_path ?>" alt="">
+
+                                <h3 class="card-title sub-title text-center"><?= $logement->type->label ?><i class="bi bi-heart heart-icon" style="margin-left: 20px; font-size: 20px; cursor: pointer;"></i></h3>
                                 <p class="card-text text-center"><?= $logement->address->city ?></p>
                                 <p class="card-text text-center">Prix par nuit: <?= $logement->price_per_night ?> €</p>
                                 <p class="card-text text-center">Nombre de voyageurs: <?= $logement->nb_traveler ?></p>
@@ -191,36 +229,36 @@
             <?php endforeach; ?>
         </div>
     </div>
-</div>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const hearts = document.querySelectorAll('.heart-icon');
-        hearts.forEach(heart => {
-            heart.addEventListener('click', function() {
-                heart.classList.toggle('active');
-                heart.classList.toggle('bi-heart');
-                heart.classList.toggle('bi-heart-fill');
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hearts = document.querySelectorAll('.heart-icon');
+            hearts.forEach(heart => {
+                heart.addEventListener('click', function() {
+                    heart.classList.toggle('active');
+                    heart.classList.toggle('bi-heart');
+                    heart.classList.toggle('bi-heart-fill');
+                });
             });
         });
-    });
 
-    document.addEventListener('DOMContentLoaded', function() {
-    const scrollLeftButton = document.getElementById('scroll-left');
-    const scrollRightButton = document.getElementById('scroll-right');
-    const iconBar = document.getElementById('icon-bar');
+        document.addEventListener('DOMContentLoaded', function() {
+            const scrollLeftButton = document.getElementById('scroll-left');
+            const scrollRightButton = document.getElementById('scroll-right');
+            const iconBar = document.getElementById('icon-bar');
 
-    scrollLeftButton.addEventListener('click', function() {
-        iconBar.scrollBy({
-            left: -100,  // Adjust this value to control the scroll distance
-            behavior: 'smooth'
+            scrollLeftButton.addEventListener('click', function() {
+                iconBar.scrollBy({
+                    left: -100, // Adjust this value to control the scroll distance
+                    behavior: 'smooth'
+                });
+            });
+
+            scrollRightButton.addEventListener('click', function() {
+                iconBar.scrollBy({
+                    left: 100, // Adjust this value to control the scroll distance
+                    behavior: 'smooth'
+                });
+            });
         });
-    });
-
-    scrollRightButton.addEventListener('click', function() {
-        iconBar.scrollBy({
-            left: 100,  // Adjust this value to control the scroll distance
-            behavior: 'smooth'
-        });
-    });
-});    
-</script>
+    </script>

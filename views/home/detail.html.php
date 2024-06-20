@@ -9,19 +9,15 @@
 </div>
 
 <div class="description-detail">
+  <p><?= $logements->type->label ?></p>
   <p><?= $logements->title ?></p>
-  <p><?= $logements->description ?></p>
+  <p><?= $logements->address->city ?></p>
   <p><?= $logements->price_per_night ?> €</p>
   <p><?= $logements->nb_room ?> chambres</p>
   <p><?= $logements->nb_bed ?> lits</p>
   <p><?= $logements->nb_bath ?> salles de bains</p>
   <p><?= $logements->nb_traveler ?> voyageurs</p>
 </div>
-<div>
-  <!-- TODO : afficher LE LIEUX COMPLET -->
-</div>
-
-
 
 <div class="detail-equipement">
 
@@ -36,6 +32,10 @@
         <?php endforeach; ?>
       </ul>
     <?php endforeach; ?>
+  </div>
+
+  <div class="description">
+    <p><?= $logements->description ?></p>
   </div>
 
 
@@ -105,7 +105,7 @@
         <?php if ($auth::isAuth()) : ?>
           <button type="submit" class="reserve-button">Réserver</button>
         <?php else : ?>
-          <p>vous devez vous <a href="/connexion">connecter </a>pour reserver</p>
+          <p>Vous devez vous <a  class="custom-link" href="/connexion">connecter </a>pour reserver</p>
         <?php endif; ?>
   </form>
   <div class="note">Aucun montant ne vous sera débité pour le moment</div>

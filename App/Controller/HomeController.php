@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Controller;
 
@@ -7,17 +7,21 @@ use App\AppRepoManager;
 use Core\Session\Session;
 use Core\Controller\Controller;
 
-class HomeController extends Controller 
+class HomeController extends Controller
 {
   public function home()
   {
     $view_data = [
       'logements' => AppRepoManager::getRm()->getLogementRepository()->getAllLogement(),
+
       'form_result' => Session::get(Session::FORM_RESULT),
       'form_success' => Session::get(Session::FORM_SUCCESS),
+
     ];
+    // var_dump($view_data['logements']);
     $view = new View('home/index');
 
+ 
     $view->render($view_data);
   }
 
@@ -31,9 +35,5 @@ class HomeController extends Controller
     $view = new View('home/detail');
 
     $view->render($view_data);
-
-
   }
-
-
 }

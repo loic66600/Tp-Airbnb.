@@ -256,4 +256,74 @@ class LogementController extends Controller
             self::redirect('/');
         }
     }
+
+    public function vuelogement($user_id)
+    {
+        $View = new View('home/insertLogementForm');
+
+        $view_data = [
+            'vuelogement' => AppRepoManager::getRm()->getLogementRepository()->getLogementByUser($user_id),
+            'form_result' => Session::get(Session::FORM_RESULT),
+            'form_success' => Session::get(Session::FORM_SUCCESS),
+        ];
+
+        $View->render($view_data);
+    }
+
+
+    public function deleteReservation($id)
+    {
+      $form_result = new FormResult();
+
+      //appele de la methode qui desative une reservation
+      $deletLogement = AppRepoManager::getRm()->getReservationRepository()->deleteReservation($id);
+
+      if (!$deletLogement) {
+        $form_result->addError(new FormError('Une erreur est survenue lors de la suppression de la reservation'));
+      } else {
+        $form_result->addSuccess(new FormSuccess('La reservation a bien été supprimé'));
+      }
+
+      if ($form_result->hasErrors()) {
+        Session::set(Session::FORM_RESULT, $form_result);
+        self::redirect('/result_reservation');
+      }
+      if ($form_result->hasSuccess()) {
+        Session::remove(Session::FORM_RESULT);
+        Session::set(Session::FORM_SUCCESS, $form_result);
+        //on redirige sur la page detail de la pizza
+        self::redirect('/');
+      }
+
+    
+    }
+
+    public function deleteLogement($id)
+    {
+      $form_result = new FormResult();
+
+      //appele de la methode qui desative une reservation
+      $deletLogement = AppRepoManager::getRm()->getLogementRepository()->deleteLogement($id);
+
+      if (!$deletLogement) {
+        $form_result->addError(new FormError('Une erreur est survenue lors de la suppression du logement'));
+      } else {
+        $form_result->addSuccess(new FormSuccess('Le logement a bien été supprimé'));
+      }
+
+      if ($form_result->hasErrors()) {
+        Session::set(Session::FORM_RESULT, $form_result);
+        self::redirect('/result_reservation');
+      }
+      if ($form_result->hasSuccess()) {
+        Session::remove(Session::FORM_RESULT);
+        Session::set(Session::FORM_SUCCESS, $form_result);
+        //on redirige sur la page detail de la pizza
+        self::redirect('/');
+      }
+
+    
+    }
+
+
 }

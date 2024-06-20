@@ -16,6 +16,22 @@ li {
   list-style: none;
 }
 
+html {
+  height: 100%;
+}
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+}
+.main-container{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+}
 .home {
 
   display: flex;
@@ -24,11 +40,15 @@ li {
   align-items: center;
   margin-top: 5%;
 }
+.auth-link{
+  color: #e04e53;
+}
 
 #footer {
   display: flex;
   flex-direction: row;
   align-items: center;
+  clear:both;
 }
 
 .box-footer-logo {
@@ -38,6 +58,20 @@ li {
   border-radius: 50%;
   justify-content: center;
 }
+.container-form{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+}
+.form-control{
+  width: 800px;
+ 
+}
+
 
 .footer-logo {
   width: 120px;
@@ -186,6 +220,9 @@ body {
   width: 300px;
   height: 300px;
   gap: 15px;
+}
+.description{
+width: 25%;
 }
 
 .description-detail {
@@ -488,6 +525,7 @@ th {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   padding: 10px;
+ 
 }
 
 .icon-bar {
@@ -509,10 +547,11 @@ th {
 
 .icon-item {
   flex: 0 0 auto;
-  padding: 10px;
+  padding: 30px;
   text-align: center;
   cursor: pointer;
   white-space: nowrap;
+  
 }
 
 .icon-item img {

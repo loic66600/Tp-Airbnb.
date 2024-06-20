@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Model\Address;
 use Core\Repository\Repository;
 
 class AddressRepository extends Repository
@@ -29,5 +30,19 @@ class AddressRepository extends Repository
     //on retourne l id de la nouvelle entrée
     return $this->pdo->lastInsertId();
   }
+
+  public function getAlladdress(int $id): ?object
+    {   
+        $q = sprintf('SELECT * FROM `%s` WHERE `id` = :address_id',
+        $this->getTableName());
+ 
+        $stmt = $this->pdo->prepare($q);
+        $stmt->execute(['address_id' => $id]);
+        if(!$stmt) return null;
+        
+        $result = $stmt->fetch();
+        return new Address($result);
+ 
+    }
 
 }

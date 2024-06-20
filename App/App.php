@@ -76,6 +76,11 @@ class App implements DatabaseConfigInterface
     $this->router->get('/result_reservation/{id}', [LogementController::class, 'result_reservation']);
     $this->router->get('/add_logement', [LogementController::class, 'insertLogement']);
     $this->router ->post('/insertLogementForm', [LogementController::class, 'insertLogementForm']);
+    $this->router ->get('/insertLogementForm/{user_id}', [LogementController::class, 'vuelogement']);
+    $this->router ->get('/reservation/delete/{id}', [LogementController::class, 'deleteReservation']);
+    $this->router ->get('/logement/delete/{id}', [LogementController::class, 'deleteLogement']);
+
+    
   }
 
   //3. méthode qui démarre le router
