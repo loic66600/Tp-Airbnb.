@@ -1,0 +1,1 @@
+<h1>votre maison est bien enregistré</h1>
