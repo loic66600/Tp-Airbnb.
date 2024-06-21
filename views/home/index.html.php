@@ -209,23 +209,25 @@
     <div class="container">
         <div class="cards-container">
             <?php foreach ($logements as $logement) : ?>
-                <div class="card-item">
-                    <div class="card">
+                <!-- <div class="card-item" style=""> -->
+                    <div class="card" style="width: 18rem; height: 100%;">
                         <form action="/detail/<?= $logement->id ?>">
 
                             <div class="card-body">
 
                                 <img class="card-img" src="/assets/image/<?= $logement->medias[0]->image_path ?>" alt="">
 
-                                <h3 class="card-title sub-title text-center"><?= $logement->type->label ?><i class="bi bi-heart heart-icon" style="margin-left: 20px; font-size: 20px; cursor: pointer;"></i></h3>
-                                <p class="card-text text-center"><?= $logement->address->city ?></p>
+                                <h3 class="card-title sub-title text-center"><?= $logement->address->city ?> ,<?= $logement->address->country ?><i class="bi bi-heart heart-icon" style="margin-left: 20px; font-size: 20px; cursor: pointer;"></i></h3>
+                               
+                                <p class="card-text text-center"><?= $logement->type->label ?></p>
+
                                 <p class="card-text text-center">Prix par nuit: <?= $logement->price_per_night ?> €</p>
                                 <p class="card-text text-center">Nombre de voyageurs: <?= $logement->nb_traveler ?></p>
                                 <button class="btn btn-custom">Détails</button>
                             </div>
                         </form>
                     </div>
-                </div>
+                <!-- </div> -->
             <?php endforeach; ?>
         </div>
     </div>

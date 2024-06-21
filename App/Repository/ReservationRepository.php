@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 
+use App\AppRepoManager;
 use App\Model\Reservation;
 use Core\Repository\Repository;
 
@@ -80,7 +81,7 @@ class ReservationRepository extends Repository
     //on boucle sur les resultats
     while ($row_data = $stmt->fetch()) {
       $reservation = new Reservation($row_data);
-
+      $reservation->logement = AppRepoManager::getRm()->getLogementRepository()->getOneLogement($reservation->logement_id);
       $array_result[] = $reservation;
     }
     //on retourne le tableau
@@ -88,7 +89,7 @@ class ReservationRepository extends Repository
   }
 
   public function deleteReservation(int $id): bool
-{
+  {
     $q = sprintf(
       'DELETE FROM `%s`
       WHERE `id` = :id',
@@ -102,7 +103,54 @@ class ReservationRepository extends Repository
 
     //on retourne l id de la nouvelle entrée
     return $stmt->execute(['id' => $id]);
-}
+  }
+
+  public function findLastOrder():?int
+  {
+    $query = sprintf(
+      'SELECT * 
+        FROM `%s` 
+        ORDER BY id DESC 
+        LIMIT 1',
+      $this->getTableName()
+    );
+    $stmt = $this->pdo->query($query);
+
+    //on vérifie si s'est bien bien executer
+    if (!$stmt) return null;
+
+    // on retourne l'id de la commande
+    $result = $stmt->fetchObject();
+
+    return $result->id ?? 0;
+  }
+  public function getReservationByHote(int $id): array
+  {
+    //on déclare un tableau vide
+    $array_result = [];
+    $q = sprintf(
+      'SELECT * 
+      FROM `%s`
+      WHERE `logement_id` = :id',
+      $this->getTableName()
+    );
+   
+    //on execute la requête
+    $stmt = $this->pdo->prepare($q);
+
+    if (!$stmt) return $array_result;
+
+    $stmt->execute(['id' => $id]);
+
+    //on boucle sur les resultats
+    while ($row_data = $stmt->fetch()) {
+      $reservationsHotes = new Reservation($row_data);
+      $reservationsHotes->logement = AppRepoManager::getRm()->getLogementRepository()->getOneLogement($reservationsHotes->logement_id);
+      $array_result[] = $reservationsHotes;
+    }
+    //on retourne le tableau
+    return $array_result;
+  }
 
 
 }

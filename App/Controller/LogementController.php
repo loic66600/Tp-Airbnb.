@@ -30,46 +30,59 @@ class LogementController extends Controller
     public function reservation(ServerRequest $request)
     {
         $data_form = $request->getParsedBody();
-
+        var_dump($data_form);
 
         $form_result = new FormResult();
         $logement = new Logement();
         $nombre_jours = date_diff(new DateTime($data_form['date_start']), new DateTime($data_form['date_end']))->days;
 
 
-        if (empty($data_form['date_start']) || empty($data_form['date_end']) || empty($data_form['nb_adult']) || empty($data_form['nb_child']) || empty($data_form['logement_id'])) {
-            $form_result->addError(new FormError('Veuillez remplir tous les champs6'));
-        }
-
-        $order_number = $this->generateOrderNumber();
-        $date_start = date('Y-m-d', strtotime($data_form['date_start']));
-        $date_end = date('Y-m-d', strtotime($data_form['date_end']));
-        $nb_adult = $data_form['nb_adult'];
-        $nb_child = $data_form['nb_child'];
-        $logement_id = $data_form['logement_id'];
-        $user_id = Session::get(Session::USER)->id;
-        $price_total = $nombre_jours * $data_form['price_per_night'];
-
-
-        $data_order = [
-            'order_number' => $order_number,
-            'date_start' => $date_start,
-            'date_end' => $date_end,
-            'nb_adult' => intval($nb_adult),
-            'nb_child' => intval($nb_child),
-            'user_id' => intval($user_id),
-            'logement_id' => intval($logement_id),
-            'price_total' => intval($price_total),
-        ];
-
-
-        $reservation = AppRepoManager::getRm()->getReservationRepository()->getReservationById($data_order);
-        // var_dump($reservation);
-        if (!$reservation) {
-            $form_result->addError(new FormError('Une reservation est deja en cours'));
+        if (
+            !isset($data_form['date_start']) ||
+            !isset($data_form['date_end']) ||
+            !isset($data_form['nb_adult']) ||
+            !isset($data_form['nb_child']) ||
+            !isset($data_form['price_per_night']) ||
+            !isset($data_form['logement_id'])
+        ) {
+           
+            
+            $form_result->addError(new FormError('Veuillez remplir tous les champs'));
         } else {
-            $form_result->addSuccess(new FormSuccess('Reservation effectuee'));
+        
+         
+            $order_number = $this->generateOrderNumber();
+            $date_start = date('Y-m-d', strtotime($data_form['date_start']));
+            $date_end = date('Y-m-d', strtotime($data_form['date_end']));
+            $nb_adult = $data_form['nb_adult'];
+            $nb_child = $data_form['nb_child'];
+            $logement_id = $data_form['logement_id'];
+            $user_id = Session::get(Session::USER)->id;
+            $price_total = $nombre_jours * $data_form['price_per_night'];
+
+
+            $data_order = [
+                'order_number' => $order_number,
+                'date_start' => $date_start,
+                'date_end' => $date_end,
+                'nb_adult' => intval($nb_adult),
+                'nb_child' => intval($nb_child),
+                'user_id' => intval($user_id),
+                'logement_id' => intval($logement_id),
+                'price_total' => intval($price_total),
+
+            ];
+
+
+            $reservation = AppRepoManager::getRm()->getReservationRepository()->getReservationById($data_order);
+            // var_dump($reservation);
+            if (!$reservation) {
+                $form_result->addError(new FormError('Une reservation est deja en cours'));
+            } else {
+                $form_result->addSuccess(new FormSuccess('Reservation effectuee'));
+            }
         }
+
 
 
         if ($form_result->hasErrors()) {
@@ -84,12 +97,12 @@ class LogementController extends Controller
         }
     }
 
-    private function generateOrderNumber()
+    private function generateOrderNumber(): string
     {
         //je veux un numero de commande du type: FACT2406_00001 par exemple
         $order_number = 1;
-        $order = AppRepoManager::getRm()->getLogementRepository()->getOneLogement($order_number);
-        //   $order_number = str_pad($order + 1, 5, '0', STR_PAD_LEFT);
+        $order = AppRepoManager::getRm()->getReservationRepository()->findLastOrder();
+        $order_number = str_pad($order + 1, 5, '0', STR_PAD_LEFT);
         $year = date('y');
         $month = date('m');
 
@@ -100,7 +113,6 @@ class LogementController extends Controller
     public function result_reservation($id)
     {
         $view_data = [
-
             'reservations' => AppRepoManager::getRm()->getReservationRepository()->getReservation($id),
             'form_result' => Session::get(Session::FORM_RESULT),
             'form_success' => Session::get(Session::FORM_SUCCESS),
@@ -273,57 +285,65 @@ class LogementController extends Controller
 
     public function deleteReservation($id)
     {
-      $form_result = new FormResult();
+        $form_result = new FormResult();
 
-      //appele de la methode qui desative une reservation
-      $deletLogement = AppRepoManager::getRm()->getReservationRepository()->deleteReservation($id);
+        //appele de la methode qui desative une reservation
+        $deletLogement = AppRepoManager::getRm()->getReservationRepository()->deleteReservation($id);
 
-      if (!$deletLogement) {
-        $form_result->addError(new FormError('Une erreur est survenue lors de la suppression de la reservation'));
-      } else {
-        $form_result->addSuccess(new FormSuccess('La reservation a bien été supprimé'));
-      }
+        if (!$deletLogement) {
+            $form_result->addError(new FormError('Une erreur est survenue lors de la suppression de la reservation'));
+        } else {
+            $form_result->addSuccess(new FormSuccess('La reservation a bien été supprimé'));
+        }
 
-      if ($form_result->hasErrors()) {
-        Session::set(Session::FORM_RESULT, $form_result);
-        self::redirect('/result_reservation');
-      }
-      if ($form_result->hasSuccess()) {
-        Session::remove(Session::FORM_RESULT);
-        Session::set(Session::FORM_SUCCESS, $form_result);
-        //on redirige sur la page detail de la pizza
-        self::redirect('/');
-      }
-
-    
+        if ($form_result->hasErrors()) {
+            Session::set(Session::FORM_RESULT, $form_result);
+            self::redirect('/result_reservation');
+        }
+        if ($form_result->hasSuccess()) {
+            Session::remove(Session::FORM_RESULT);
+            Session::set(Session::FORM_SUCCESS, $form_result);
+            //on redirige sur la page home
+            self::redirect('/');
+        }
     }
 
     public function deleteLogement($id)
     {
-      $form_result = new FormResult();
+        $form_result = new FormResult();
 
-      //appele de la methode qui desative une reservation
-      $deletLogement = AppRepoManager::getRm()->getLogementRepository()->deleteLogement($id);
+        //appele de la methode qui desative une reservation
+        $deletLogement = AppRepoManager::getRm()->getLogementRepository()->deleteLogement($id);
 
-      if (!$deletLogement) {
-        $form_result->addError(new FormError('Une erreur est survenue lors de la suppression du logement'));
-      } else {
-        $form_result->addSuccess(new FormSuccess('Le logement a bien été supprimé'));
-      }
+        if (!$deletLogement) {
+            $form_result->addError(new FormError('Une erreur est survenue lors de la suppression du logement'));
+        } else {
+            $form_result->addSuccess(new FormSuccess('Le logement a bien été supprimé'));
+        }
 
-      if ($form_result->hasErrors()) {
-        Session::set(Session::FORM_RESULT, $form_result);
-        self::redirect('/result_reservation');
-      }
-      if ($form_result->hasSuccess()) {
-        Session::remove(Session::FORM_RESULT);
-        Session::set(Session::FORM_SUCCESS, $form_result);
-        //on redirige sur la page detail de la pizza
-        self::redirect('/');
-      }
-
-    
+        if ($form_result->hasErrors()) {
+            Session::set(Session::FORM_RESULT, $form_result);
+            self::redirect('/result_reservation');
+        }
+        if ($form_result->hasSuccess()) {
+            Session::remove(Session::FORM_RESULT);
+            Session::set(Session::FORM_SUCCESS, $form_result);
+            //on redirige sur la page detail de la pizza
+            self::redirect('/');
+        }
     }
+    public function result_reservationHote(int $id)
+    {
+        $view_data = [
+            'reservationsHotes' => AppRepoManager::getRm()->getReservationRepository()->getReservationByHote($id),
 
+            'form_result' => Session::get(Session::FORM_RESULT),
+            'form_success' => Session::get(Session::FORM_SUCCESS),
 
+        ];
+
+        $view = new View('home/reservationByHote');
+
+        $view->render($view_data);
+    }
 }

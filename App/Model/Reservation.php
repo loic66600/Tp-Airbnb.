@@ -20,5 +20,6 @@ public int $user_id;
 
 public Logement $logement;
 public User $user;
+public Address $address;
 
 }

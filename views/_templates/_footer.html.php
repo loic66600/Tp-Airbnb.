@@ -1,23 +1,27 @@
-
 </div>
 <hr>
 <footer id="footer">
   <!-- 1ere ligne  -->
-  <div class="box-footer-logo">
-    <img class="footer-logo" src="/assets/image/logo.png" alt="logo Airbnb">
-  </div>
+
+  
   <!-- 2eme ligne  -->
   <nav class="nav-footer">
+    <img class="footer-logo" src="/assets/image/logo.png" alt="logo Airbnb">
     <ul class="nav-ul-footer">
-
       <div class="box-icon-footer">
         <div class="box-footer">
-          <p class="footer-description">&copy; 2024 - Airbnb, Inc.</p>
-          <p class="footer-description"><a href="https://www.airbnb.fr/help/article/2855">Confidentialité</a></p>
-          <p class="footer-description"><a href="https://www.airbnb.fr/help/article/2908">Condition générales</a></p>
-          <p class="footer-description"><a href="https://www.airbnb.fr/sitemaps/v2">Plan du site</a></p>
-          <p class="footer-description"><a href="https://www.airbnb.fr/fonctionnement_du_site">Fonctionnemment du site</a></p>
-          <p class="footer-description"><a href="#">Infos sur l'entreprise</a></p>
+          <div>
+            <p class="footer-description">&copy; 2024 - Airbnb, Inc.</p>
+            <p class="footer-description"><a href="https://www.airbnb.fr/help/article/2855">Confidentialité</a></p>
+          </div>
+          <div>
+            <p class="footer-description"><a href="https://www.airbnb.fr/help/article/2908">Condition générales</a></p>
+            <p class="footer-description"><a href="https://www.airbnb.fr/sitemaps/v2">Plan du site</a></p>
+          </div>
+          <div>
+            <p class="footer-description"><a href="https://www.airbnb.fr/fonctionnement_du_site">Fonctionnemment du site</a></p>
+            <p class="footer-description"><a href="#">Infos sur l'entreprise</a></p>
+          </div>
         </div>
         <div class="list-icon-footer">
           <li><a class="social-icon" href="https://www.facebook.com/AirbnbFrance/?locale=fr_FR"><i class="bi bi-facebook"></i></a></li>
@@ -27,9 +31,7 @@
       </div>
     </ul>
   </nav>
-
   <!-- 3eme ligne  -->
-
 </footer>
 
 <!-- import de la librairie popperjs -->

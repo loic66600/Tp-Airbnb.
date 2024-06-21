@@ -73,7 +73,10 @@ class App implements DatabaseConfigInterface
     // CONNEXION
     $this->router->get('/detail/{id}', [HomeController::class, 'index']);
     $this->router->post('/reservation/{id}', [LogementController::class, 'reservation']);
+
     $this->router->get('/result_reservation/{id}', [LogementController::class, 'result_reservation']);
+    $this->router->get('/reservationByHote/{id}', [LogementController::class, 'result_reservationHote']);
+
     $this->router->get('/add_logement', [LogementController::class, 'insertLogement']);
     $this->router ->post('/insertLogementForm', [LogementController::class, 'insertLogementForm']);
     $this->router ->get('/insertLogementForm/{user_id}', [LogementController::class, 'vuelogement']);

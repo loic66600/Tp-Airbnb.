@@ -66,7 +66,7 @@ class AuthController extends Controller
         'firstname' => $this->validInput($data_form['firstname'])
       ];
 
-      AppRepoManager::getRm()->getUserRepository()->addUser($data_user);
+      $user=AppRepoManager::getRm()->getUserRepository()->addUser($data_user);
     }
 
     if ($form_result->hasErrors()) {
