@@ -18,8 +18,8 @@
       <input type="password" class="form-control" name="password">
     </div>
     
-   
-    <button type="submit" class="call-action">Je me connecte</button>
+  
+    <button type="submit" class="call-action btn btn-outline-secondary rounded-pill">Je me connecte</button>
   </form>
   <p class="header-description">Je n'ai pas de compte, <a class="auth-link" href="/inscription">je m'inscrit</a></p>
 </main>

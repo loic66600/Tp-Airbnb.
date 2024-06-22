@@ -27,7 +27,7 @@
     </div>
 
 
-    <button type="submit" class="call-action">S'inscrire</button>
+    <button type="submit" class="call-action btn btn-outline-secondary rounded-pill">S'inscrire</button>
   </form>
   <p class="header-description">Vous avez un compte ? <a class="auth-link" href="/connexion">je me connecte</a></p>
 </main>

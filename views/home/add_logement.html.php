@@ -5,6 +5,7 @@ use App\AppRepoManager;
 use Core\Session\Session;
 
  ?>
+<h1 class="title">Ajouter un logement</h1>
 
 <div class="container ">
     <form class="add-logement-form" action="/insertLogementForm" enctype="multipart/form-data" method="POST">
@@ -50,7 +51,7 @@ use Core\Session\Session;
             <div class="form-container">
                 <div class="box-auth-input ">
                     <label class="detail-description">Type de logement</label>
-                    <div style="display:flex;gap:10px;">
+                    <div style="gap:10px;">
                   <?php foreach (AppRepoManager::getRm()->getTypeRepository()->readAll(Type::class) as $type) : ?>
                         <input type="checkbox" name="type_id" value="<?= $type->id ?>">
                     <label for="type"><?= $type->label ?></label>

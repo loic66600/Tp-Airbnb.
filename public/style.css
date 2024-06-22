@@ -19,6 +19,9 @@ li {
 html {
   height: 100%;
 }
+.add-logement-form{
+  width: 800px;
+}
 
 body {
   min-height: 100vh;
@@ -28,9 +31,14 @@ body {
 
 }
 
+.call-action {
+ margin-top: 20px;
+}
+
 .main-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   flex-grow: 1;
 
 }
@@ -69,7 +77,7 @@ body {
 .detail-container {
 
   display: flex;
-  width: 100%;
+  width: 60%;
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -82,8 +90,16 @@ body {
   border-radius: 50%;
   justify-content: center;
 }
-
-
+button{
+  display: block;
+  margin: 10px 0;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.more-text {
+  display: none;
+}
 
 .container-form {
   width: 100%;
@@ -105,6 +121,7 @@ body {
   width: 120px;
   height: auto;
   object-fit: contain;
+  margin-right: 100px;
 }
 
 .header-logo {
@@ -238,11 +255,13 @@ body {
 
   width: 350px;
   height: 350px;
-
+  object-fit: cover;
+  border-radius: 10px;
 }
 
 .description {
   width: 100%;
+  text-align: justify;
 }
 
 .detail {
@@ -314,6 +333,7 @@ body {
 }
 
 .booking-summary {
+  position: sticky;
   background-color: #ffffff;
   border: 1px solid #e0e0e0;
   border-radius: 10px;
@@ -339,7 +359,7 @@ body {
 }
 
 .details {
-  display: flex;
+  flex:0.5;
   justify-content: space-between;
   margin-bottom: 10px;
   flex-wrap: wrap;
@@ -455,8 +475,11 @@ body {
 }
 
 .image-equipement {
-  width: 30px;
+  width: 40px;
 
+}
+.equipement{
+  width: 100%;
 }
 
 .container-fluid{
@@ -498,12 +521,13 @@ body {
   justify-content: center;
   flex-direction: column;
   align-items: flex-start;
-  width: 25%;
+  width: 50%;
   height: auto;
   gap: 10px;
 }
 
 .title-equipement {
+  width: 100%;
   font-size: 20px;
   color: #b0b0b0;
   text-align: center;
@@ -529,12 +553,26 @@ th {
 }
 
 .card {
-  height: 450px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+.card:hover {
+  transform: translateY(-10px);
 }
 
 .card-img {
   height: 200px;
   object-fit: cover;
+}
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
 }
 
 .card-body {
@@ -543,10 +581,16 @@ th {
   justify-content: space-between;
   align-items: flex-start;
 }
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 .card-title {
-  font-size: 1.50rem;
+  font-size: 18px;
   height: 3rem;
+  font-weight: bold;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -561,6 +605,9 @@ th {
   border-color: #ff5a5f;
   color: white;
   width: 100%;
+}
+.btn-custom:hover {
+  background-color: #0056b3;
 }
 
 .btn-info {
@@ -647,6 +694,10 @@ th {
   opacity: 0.2;
 
 }
+.reservation {
+  position: relative;
+  flex: 0 0 300px;
+}
 
 .scroll-button {
   position: absolute;
@@ -665,16 +716,57 @@ th {
 .scroll-button.left {
   left: 5px;
 }
+.sticky {
+  position: fixed;
+  top: 20px;
+  z-index: 1000; /* Pour s'assurer que l'élément est au-dessus des autres contenus */
+}
 
 .scroll-button.right {
   right: 5px;
 }
 
 .title {
-  margin-top: 30px;
+  margin: 30px 0;
 
 }
 
+/* .................................................... */
+.text-container {
+  width: 100%;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  overflow: hidden; /* Pour masquer le texte supplémentaire */
+  max-height: 300px; /* Hauteur maximale initiale du conteneur */
+  position: relative;
+}
+
+.text {
+
+  overflow: hidden; /* Pour empêcher le texte de sortir du conteneur */
+}
+
+.button-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  background-color: white; /* Couleur de fond pour couvrir le texte caché */
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: #ff5a5f;
+}
+
+
+/* ........................................................... */
 /* Ajoutons les styles pour rendre la page responsive */
 
 /* Pour les petits écrans (smartphones) */
@@ -683,6 +775,11 @@ th {
     display: flex;
     flex-direction: column;
     align-items: center
+  }
+  .container-fluid{
+    border: none;
+    box-shadow: none;
+
   }
   .box-footer{
     display: flex;
@@ -695,12 +792,25 @@ th {
     flex-direction: column;
     align-items: flex-start ;
   }
+  .add-logement-form{
+    width: 250px;
+  }
+  /* .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  } */
+  
   .detail{
     display: flex;
     flex-direction: column;
     align-items: center 
 
   }
+  .detail {
+    flex: 1;
+}
   .detail-equipement{
     display: flex;
     flex-direction: column;
@@ -713,6 +823,9 @@ th {
     align-items: center ;
     width: 100%;
   }
+  .form-control{
+    width: 250px
+  }
   .nav-ul-footer{
     display: flex;
     flex-direction: column;
@@ -720,14 +833,13 @@ th {
     align-items: flex-start;
 
   }
+  
 }
 
 /* Pour les tablets */
-@media screen and (min-width: 601px) and (max-width: 839px) {
+@media screen and (min-width: 601px) and (max-width: 989px) {
   .box-footer{
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
+    display: ruby;
     gap: 30px;
   }
   .box-icon-footer{
@@ -738,6 +850,16 @@ th {
   .footer-logo{
     size: 10px;
   }
+  .add-logement-form{
+    width: 500px;
+  }
+  .table{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+  }
+  
   .detail{
     display: flex;
     flex-direction: column;
@@ -773,9 +895,12 @@ th {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 100px;
+    margin-top: 50px;
 
   }
+ .form-control{
+  width: 500px;
+ }
 
   #footer{
     display: flex;
@@ -790,7 +915,7 @@ th {
   }
 }
 /* Pour les ordinateur */ 
-@media screen and  (min-width: 840px) {
+@media screen and  (min-width: 990px) {
 
   .box-footer{
     display: flex;
@@ -806,10 +931,18 @@ th {
   .footer-logo{
     size: 10px;
   }
+
   .detail{
     display: flex;
-    flex-direction: column;
-    align-items: center 
+    flex-direction: row;
+    align-items: flex-start 
+  }
+  .nav-footer{
+    display: flex;
+    flex-direction: initial;
+    align-items: flex end;
+    justify-content: center;
+    margin-top: 50px;
   }
 
 }
