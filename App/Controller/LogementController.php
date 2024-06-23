@@ -250,9 +250,9 @@ class LogementController extends Controller
                 ];
                 $media_data = AppRepoManager::getRm()->getMediaRepository()->insert_Media($media_data);
                 if (!$media_data) {
-                    $form_result->addError(new FormError('erreur insert image'));
+                    $form_result->addError(new FormError('Une erreur est survenue lors de l\'insertion du logement'));
                 } else {
-                    $form_result->addSuccess(new FormSuccess('ajout reussi'));
+                    $form_result->addSuccess(new FormSuccess('Votre logement a bien été ajouté'));
                 }
             }
         }

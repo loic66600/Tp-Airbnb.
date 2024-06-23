@@ -128,6 +128,6 @@ use Core\Session\Session;
         <?php endif ?>
         
         <button type="submit" class="call-action btn btn-primary mt-4">Ajouter logement</button>
-        <a href="/" class="btn btn-primary mt-4">Annuler</a>
+        <a href="/" class="btn btn-primary mt-3">Annuler</a>
     </form>
 </div>
