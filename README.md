@@ -1,4 +1,5 @@
 Projet Airbnb - PHP Orienté Objet
+
 🐻 À propos du projet
 Ce projet a été développé dans le cadre de ma formation en développement web. Il s'agit d'une application PHP orientée objet inspirée du fonctionnement d'Airbnb. L'objectif principal était d'appliquer et d'approfondir nos connaissances en PHP orienté objet en recréant certaines fonctionnalités clés d'une plateforme de location entre particuliers.
 
@@ -23,7 +24,7 @@ Naviguez dans le répertoire du projet : cd [NOM_DU_PROJET]
 
 Lancez l'environnement Lando : lando start
 
-Importez la base de données : lando db-import bdd-
+Importez la base de données : lando db-import bdd-data_base_airbnb
 
 Installez les dépendances avec Composer : lando composer install
 
