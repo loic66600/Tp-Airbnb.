@@ -1,6 +1,8 @@
 Projet Airbnb - PHP Orienté Objet
 
-🐻 À propos du projet
+Projet Airbnb - PHP Orienté Objet
+
+🏠 À propos du projet
 Ce projet a été développé dans le cadre de ma formation en développement web. Il s'agit d'une application PHP orientée objet inspirée du fonctionnement d'Airbnb. L'objectif principal était d'appliquer et d'approfondir nos connaissances en PHP orienté objet en recréant certaines fonctionnalités clés d'une plateforme de location entre particuliers.
 
 🎯 Objectifs d'apprentissage
