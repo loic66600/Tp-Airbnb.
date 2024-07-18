@@ -19,9 +19,9 @@ Prérequis:
 Lando installé sur votre machine
 Composer pour la gestion des dépendances
 Installation
-Clonez ce dépôt sur votre machine locale : git clone [URL_DU_REPO]
+Clonez ce dépôt sur votre machine locale : git clone 
 
-Naviguez dans le répertoire du projet : cd [NOM_DU_PROJET]
+Naviguez dans le répertoire du projet : cd 
 
 Lancez l'environnement Lando : lando start
 
